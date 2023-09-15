@@ -48,7 +48,8 @@ class GithubService:
         pr = self._pull_request_repo.get(pr_number)
         main = self.get_main_branch()
         if not main:
-            main = pr.branch.model_copy(deep=True, update={"name": Config.MAIN_BRANCH})
+            main = pr.branch.model_copy(deep=True)
+            main.name = Config.MAIN_BRANCH
             self._branch_repo.upsert(main)
             self._github_api_client.post_comment(pr_number, "Congrats! This is the first time you are using our tool!")
             return
