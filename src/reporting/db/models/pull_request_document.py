@@ -4,8 +4,9 @@ from reporting.db.models.branch_document import BranchDocument
 
 
 class PullRequestDocument(Document):
-    gh_number = StringField(required=True, primary_key=True)
-    repository = StringField(required=True, primary_key=True)
+    id = StringField(required=True, primary_key=True)
+    gh_number = StringField(required=True)
+    repository = StringField(required=True)
     branch = ReferenceField(BranchDocument, required=True)
     author_username = StringField(required=True)
     author_name = StringField(required=True)

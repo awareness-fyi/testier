@@ -2,6 +2,7 @@ from mongoengine import Document, StringField, DecimalField
 
 
 class BranchDocument(Document):
-    repository = StringField(required=True, primary_key=True)
-    name = StringField(required=True, primary_key=True)
+    id = StringField(required=True, primary_key=True)
+    repository = StringField(required=True)
+    name = StringField(required=True)
     coverage_rate = DecimalField(required=True)
