@@ -18,10 +18,9 @@ class CoverageReportApplicationService:
     def update_pull_request(self, file_path: str, pull_request_number: str) -> None:
         raw = self._file_reader.read(Path(file_path))
         report = self._report_parser.parse(json.loads(raw))
-        main = self._github_service.get_main_branch()
         coverage_report = CoverageReport(percent=report.totals.percent_covered)
+        main = self._github_service.get_main_branch()
         pull_request = self._github_service.upsert_pull_request(pull_request_number, coverage_report)
-
         message = Message.build(main, pull_request.branch)
 
         self._github_service.notify(pull_request, message)

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from mongoengine import DoesNotExist
 
 from infrastructure.config import Config
@@ -21,7 +23,10 @@ class GithubService:
 
     def upsert_pull_request(self, github_pull_request_number: str, coverage_report: CoverageReport) -> PullRequest:
         main = self.get_main_branch()
-        coverage_change = coverage_report.compare(main.coverage_report)
+        if main:
+            coverage_change = coverage_report.compare(main.coverage_report)
+        else:
+            coverage_change = Decimal("0")
         try:
             pull_request = self._pull_request_repo.get(github_pull_request_number)
             pull_request.coverage_change = coverage_change
