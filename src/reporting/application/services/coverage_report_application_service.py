@@ -5,6 +5,7 @@ from infrastructure.gateway.github_api_client import GithubApiClient
 from infrastructure.readers.file_reader import FileReader
 from notifications.interfaces.notification_service import NotificationService
 from reporting.gateway.pytest.parsers.pytest_coverage_report_parser import PytestCoverageReportParser
+from reporting.models.message import Message
 from reporting.services.github_service import GithubService
 
 
@@ -22,36 +23,8 @@ class CoverageReportApplicationService:
         # pull_request = self._github_service.get_pull_request(pull_request)
 
         main = self._github_service.get_main_branch()
-        coverage_diff = main.coverage_report.compare(report)
+        message = Message.build(main.coverage_report, report)
         # self._github_service.upsert(pull_request.id, report, coverage_diff)
-        message = f"""
-### Code coverage change report
-        """
-        if coverage_diff.is_zero():
-            message += f"""
-It seems that nothing has changed, which is good!
-The repository keeps a decent {coverage_diff:.2f}% code coverage.
-All thanks to you! 🙏🏼
-            """
-        elif coverage_diff > 0:
-            message += f"""
-So, the situation is not looking very good.
-The code coverage in the repo just dropped {coverage_diff:.2f}% 🔻
-From {main.coverage_report.percent:.2f}% to {report.percent:.2f}%.
-            """
-        elif coverage_diff < 0:
-            message += f"""
-OMG! Look at you! You testing badass!
-The code coverage in this repository just went up by {coverage_diff:.2f}% 💚
-From {main.coverage_report.percent:.2f}% to {report.percent:.2f}%.
-            """
-
-        message += """
-_You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment_ 😎
-_Keep the hard work_ 💪🏼
-
-At your service 🫡
-            """
 
         # notification = self._notification_service.get(Channel.GITHUB)
         # notification.notify(message)
