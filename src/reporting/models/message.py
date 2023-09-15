@@ -18,6 +18,7 @@ The repository keeps a decent {main:.2f}% code coverage.
 All thanks to you! 🙏🏼"""
 
 FOOTER = """
+
 _You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment_ 😎
 _Keep the hard work_ 💪🏼"""
 
