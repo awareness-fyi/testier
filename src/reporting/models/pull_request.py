@@ -6,7 +6,7 @@ from reporting.models.repository import Repository
 
 
 class PullRequest(BaseModel):
-    id: str
+    github_pull_request_number: str
     branch: Branch
     author: GithubUser
     repository: Repository

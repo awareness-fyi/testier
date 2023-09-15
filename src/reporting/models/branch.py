@@ -6,6 +6,6 @@ from reporting.models.coverage_report import CoverageReport
 
 
 class Branch(BaseModel):
-    id: str
+    name: str
     coverage_report: CoverageReport
     diff_from_main_branch: Decimal

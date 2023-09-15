@@ -10,8 +10,8 @@ from reporting.services.github_service import GithubService
 
 class CoverageReportApplicationService:
 
-    def __init__(self):
-        self._github_service = GithubService()
+    def __init__(self, repository: str):
+        self._github_service = GithubService(repository)
         self._file_reader = FileReader()
         self._report_parser = PytestCoverageReportParser()
         self._notification_service = NotificationService()
