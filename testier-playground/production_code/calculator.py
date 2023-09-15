@@ -1,3 +1,6 @@
+from decimal import Decimal
+
+
 class Calculator:
 
     def add(self, a: int, b: int) -> int:
@@ -8,3 +11,6 @@ class Calculator:
 
     def subtract(self, a: int, b: int) -> int:
         return a - b
+
+    def divide(self, a: int, b: int) -> Decimal:
+        return Decimal(str(a / b))
