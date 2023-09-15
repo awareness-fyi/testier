@@ -52,7 +52,6 @@ class CoverageReportApplicationService:
             _Maccabi is only in Haifa_
             """
 
-        message = f"Coverage change is {coverage_diff:.2f}%.\nFrom {main.coverage_report.percent:.2f}% to {report.percent:.2f}%"
         # notification = self._notification_service.get(Channel.GITHUB)
         # notification.notify(message)
 
