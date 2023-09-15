@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-from infrastructure.gateway.github_api_client import GithubApiClient
 from infrastructure.readers.file_reader import FileReader
 from reporting.gateway.pytest.parsers.pytest_coverage_report_parser import PytestCoverageReportParser
 from reporting.models.message import Message
@@ -23,4 +22,5 @@ class CoverageReportApplicationService:
         main = self._github_service.get_main_branch()
 
         message = Message.build(main, report)
-        GithubApiClient("awareness-fyi/testier").post_comment(pull_request_number, message)
+
+        self._github_service.notify(pull_request, message)

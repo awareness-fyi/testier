@@ -1,6 +1,3 @@
-from _decimal import Decimal
-
-from infrastructure.config import Config
 from infrastructure.gateway.github_api_client import GithubApiClient
 from reporting.models.branch import Branch
 from reporting.models.coverage_report import CoverageReport

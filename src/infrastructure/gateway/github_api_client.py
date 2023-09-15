@@ -15,7 +15,6 @@ class GithubApiClient:
 
     def get_pull_request(self, github_pull_request_number: str) -> PullRequest:
         pr = self._gh.get_pull(int(github_pull_request_number))
-        pr
         return pr
 
     def post_comment(self, github_pull_request_number: str, content: str) -> IssueComment:
@@ -27,4 +26,3 @@ class GithubApiClient:
         comment = pr.get_issue_comment(int(comment_id))
         comment.edit(content)
         return comment
-

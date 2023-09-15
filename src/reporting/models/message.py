@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 from reporting.models.branch import Branch
 from reporting.models.coverage_report import CoverageReport
 
@@ -25,7 +23,6 @@ This might happen due to either:
 2. There is a problem with the main branch update.
 
 Please make sure the main branch updates after a PR is being merged."""
-
 
 FOOTER = """
 
