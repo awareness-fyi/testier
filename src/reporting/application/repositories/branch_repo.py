@@ -17,7 +17,7 @@ class BranchRepo:
         return self._mapper.map_to_model(doc)
 
     def get(self, name: str) -> Branch:
-        doc = BranchDocument.objects.get({"name": name})
+        doc = BranchDocument.objects.get(name=name)
         return self._mapper.map_to_model(doc)
 
     def update_coverage(self, name: str, coverage_diff: Decimal) -> None:

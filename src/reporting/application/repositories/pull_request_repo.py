@@ -14,5 +14,5 @@ class PullRequestRepo:
         return self._mapper.map_to_model(doc)
 
     def get(self, gh_pr_number: str) -> PullRequest:
-        doc = PullRequestDocument.objects.get({"gh_number": gh_pr_number, "repository": self._gh_repository})
+        doc = PullRequestDocument.objects.get(gh_number=gh_pr_number, repository=self._gh_repository)
         return self._mapper.map_to_model(doc)
