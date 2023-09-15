@@ -1,5 +1,4 @@
 from reporting.models.branch import Branch
-from reporting.models.coverage_report import CoverageReport
 
 COVERAGE_DECREASE = """
 Hopa hopa hopa, wait a minute 🛑
@@ -32,22 +31,21 @@ _Keep the hard work_ 💪🏼"""
 
 class Message:
     @classmethod
-    def build(cls, main: Branch | None, head: CoverageReport) -> str:
+    def build(cls, main: Branch | None, head: Branch) -> str:
         message = "### Code coverage change report"
 
         if not main:
             message += NO_MAIN
             return message
 
-        main_report = main.coverage_report
-        coverage_diff = head.compare(main_report)
+        coverage_diff = head.compare(main)
 
         if coverage_diff.is_zero():
-            message += COVERAGE_NO_CHANGE.format(main=main_report.percent)
+            message += COVERAGE_NO_CHANGE.format(main=main.coverage_report.percent)
         elif coverage_diff < 0:
-            message += COVERAGE_DECREASE.format(main=main_report.percent, head=head.percent, coverage_diff=coverage_diff)
+            message += COVERAGE_DECREASE.format(main=main.coverage_report.percent, head=head.coverage_report.percent, coverage_diff=coverage_diff)
         elif coverage_diff > 0:
-            message += COVERAGE_INCREASE.format(main=main_report.percent, head=head.percent, coverage_diff=coverage_diff)
+            message += COVERAGE_INCREASE.format(main=main.coverage_report.percent, head=head.coverage_report.percent, coverage_diff=coverage_diff)
 
         message += FOOTER
 

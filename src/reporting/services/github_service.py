@@ -1,3 +1,6 @@
+from _decimal import Decimal
+
+from infrastructure.config import Config
 from infrastructure.gateway.github_api_client import GithubApiClient
 from reporting.models.branch import Branch
 from reporting.models.coverage_report import CoverageReport
@@ -15,10 +18,12 @@ class GithubService:
     def obtain_pull_request(self, github_pull_request_number: str, coverage_report: CoverageReport) -> PullRequest:
         # TODO: if exists in DB: pull from there
         # if not:
+        main = self.get_main_branch()
         github_pull_request = self._github_api_client.get_pull_request(github_pull_request_number)
         pull_request = PullRequest(github_pull_request_number=github_pull_request_number,
                                    branch=Branch(name=github_pull_request.head.ref,
-                                                 coverage_report=coverage_report),
+                                                 coverage_report=coverage_report,
+                                                 diff_from_main=coverage_report.compare(main.coverage_report)),
                                    author=GithubUser(username=github_pull_request.user.login,
                                                      name=github_pull_request.user.name),
                                    repository=Repository(id=self._repository))
@@ -29,9 +34,8 @@ class GithubService:
     def get_main_branch(self) -> Branch | None:
         # TODO: get main branch from DB
         return Branch(name=Config.MAIN_BRANCH,
-                      coverage_report=CoverageReport(percent=Decimal("85.70"),
-                                                     diff_from_main_branch=Decimal("0"))
-                      )
+                      coverage_report=CoverageReport(percent=Decimal("85.70")),
+                      diff_from_main=Decimal("0"))
         # return None
 
     def notify(self, pull_request: PullRequest, content: str) -> None:
