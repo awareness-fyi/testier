@@ -30,4 +30,4 @@ class CoverageReportApplicationService:
         # notification = self._notification_service.get(Channel.GITHUB)
         # notification.notify(message)
 
-        GithubApiClient().post_comment(pull_request_number, message)
+        GithubApiClient("awareness-fyi/testier").post_comment(pull_request_number, message)
