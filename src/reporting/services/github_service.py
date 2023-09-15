@@ -65,7 +65,7 @@ class GithubService:
     def notify(self, pull_request: PullRequest, content: str) -> None:
         if pull_request.comment_id:
             self._github_api_client.delete_comment(pull_request.github_pull_request_number, pull_request.comment_id)
-            return
+            pull_request.comment_id = None
 
         comment = self._github_api_client.post_comment(pull_request.github_pull_request_number,
                                                        content)
