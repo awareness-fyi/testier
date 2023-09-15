@@ -1,10 +1,10 @@
 import json
 from pathlib import Path
 
-from infrastructure.gateway.github_api_client import GithubApiClient
 from infrastructure.readers.file_reader import FileReader
-from notifications.interfaces.notification_service import NotificationService
 from reporting.gateway.pytest.parsers.pytest_coverage_report_parser import PytestCoverageReportParser
+from reporting.models.coverage_report import CoverageReport
+from reporting.models.message import Message
 from reporting.services.github_service import GithubService
 
 
@@ -14,46 +14,16 @@ class CoverageReportApplicationService:
         self._github_service = GithubService(repository)
         self._file_reader = FileReader()
         self._report_parser = PytestCoverageReportParser()
-        self._notification_service = NotificationService()
 
-    def run(self, file_path: str, pull_request_number: str):
+    def update_pull_request(self, file_path: str, pull_request_number: str) -> None:
         raw = self._file_reader.read(Path(file_path))
         report = self._report_parser.parse(json.loads(raw))
-        # pull_request = self._github_service.get_pull_request(pull_request)
-
+        coverage_report = CoverageReport(percent=report.totals.percent_covered)
         main = self._github_service.get_main_branch()
-        coverage_diff = main.coverage_report.compare(report)
-        # self._github_service.upsert(pull_request.id, report, coverage_diff)
-        message = f"""
-### Code coverage change report
-        """
-        if coverage_diff.is_zero():
-            message += f"""
-It seems that nothing has changed, which is good!
-The repository keeps a decent {coverage_diff:.2f}% code coverage.
-All thanks to you! 🙏🏼
-            """
-        elif coverage_diff > 0:
-            message += f"""
-So, the situation is not looking very good.
-The code coverage in the repo just dropped {coverage_diff:.2f}% 🔻
-From {main.coverage_report.percent:.2f}% to {report.percent:.2f}%.
-            """
-        elif coverage_diff < 0:
-            message += f"""
-OMG! Look at you! You testing badass!
-The code coverage in this repository just went up by {coverage_diff:.2f}% 💚
-From {main.coverage_report.percent:.2f}% to {report.percent:.2f}%.
-            """
+        pull_request = self._github_service.upsert_pull_request(pull_request_number, coverage_report)
+        message = Message.build(main, pull_request.branch)
 
-        message += """
-_You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment_ 😎
-_Keep the hard work_ 💪🏼
+        self._github_service.notify(pull_request, message)
 
-At your service 🫡
-            """
-
-        # notification = self._notification_service.get(Channel.GITHUB)
-        # notification.notify(message)
-
-        GithubApiClient("awareness-fyi/testier").post_comment(pull_request_number, message)
+    def pull_request_merged(self, pull_request_number: str) -> None:
+        self._github_service.update_main(pull_request_number)

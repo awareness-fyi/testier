@@ -5,6 +5,5 @@ from reporting.models.coverage_report import CoverageReport
 
 
 class PytestCoverageReportParser:
-    def parse(self, raw: dict[str, Any]) -> CoverageReport:
-        report = PytestCoverageReport.model_validate(raw)
-        return report.map()
+    def parse(self, raw: dict[str, Any]) -> PytestCoverageReport:
+        return PytestCoverageReport.model_validate(raw)

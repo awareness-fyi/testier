@@ -15,16 +15,17 @@ class GithubApiClient:
 
     def get_pull_request(self, github_pull_request_number: str) -> PullRequest:
         pr = self._gh.get_pull(int(github_pull_request_number))
-        pr
         return pr
 
     def post_comment(self, github_pull_request_number: str, content: str) -> IssueComment:
         pr = self.get_pull_request(github_pull_request_number)
         return pr.create_issue_comment(content)
 
+    def delete_comment(self, github_pull_request_number: str, comment_id: str) -> None:
+        self.get_pull_request(github_pull_request_number).get_issue_comment(int(comment_id)).delete()
+
     def edit_comment(self, github_pull_request_number: str, comment_id: str, content: str) -> IssueComment:
         pr = self.get_pull_request(github_pull_request_number)
         comment = pr.get_issue_comment(int(comment_id))
         comment.edit(content)
         return comment
-

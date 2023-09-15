@@ -1,12 +1,13 @@
-name: Automated tests
-
 on:
   pull_request:
+    types:
+      - closed
 
 
 jobs:
-  ci:
+  update_main_coverage:
     runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -24,4 +25,4 @@ jobs:
           TESTIER_GITHUB_APP_PRIVATE_KEY: ${{ secrets.TESTIER_GITHUB_APP_PRIVATE_KEY }}
           TESTIER_DB_CONNECTION_STRING: ${{ secrets.TESTIER_DB_CONNECTION_STRING }}
         run: |
-          sh test.sh ${{ github.repository }} ${{ github.event.number }}
+          python src/pull_request_merged.py --pull-request ${{ github.event.number }} --repository ${{ github.repository }}

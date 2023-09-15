@@ -1,16 +1,10 @@
-from decimal import Decimal
-
 from pydantic import BaseModel
 
-from reporting.models.coverage_report import CoverageReport
+from infrastructure.types import RoundDecimal
 
 
 class PytestCoverageReport(BaseModel):
     class Totals(BaseModel):
-        percent_covered: Decimal
-        percent_covered_display: str
+        percent_covered: RoundDecimal
 
     totals: Totals
-
-    def map(self) -> CoverageReport:
-        return CoverageReport(percent=self.totals.percent_covered)

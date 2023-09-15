@@ -6,7 +6,7 @@ from reporting.application.services.coverage_report_application_service import C
 def main():
     args = get_args()
     file_path = args.file
-    CoverageReportApplicationService(args.repository).run(file_path, args.pull_request)
+    CoverageReportApplicationService(args.repository).update_pull_request(file_path, args.pull_request)
 
 
 def get_args():
