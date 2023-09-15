@@ -69,5 +69,5 @@ class GithubService:
 
         comment = self._github_api_client.post_comment(pull_request.github_pull_request_number,
                                                        content)
-        pull_request.comment_id = comment.id
+        pull_request.comment_id = str(comment.id)
         self._pull_request_repo.upsert(pull_request)
