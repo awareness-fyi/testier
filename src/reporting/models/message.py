@@ -2,7 +2,7 @@ from reporting.models.branch import Branch
 from reporting.models.coverage_report import CoverageReport
 
 COVERAGE_DECREASE = """
-So, the situation is not looking very good.
+Hopa hopa hopa, wait a minute 🛑
 The code coverage in the repo just dropped {coverage_diff:.2f}% 🔻
 From {main:.2f}% to {head:.2f}%."""
 
