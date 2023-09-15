@@ -19,7 +19,7 @@ class CoverageReportApplicationService:
     def run(self, file_path: str, pull_request_number: str):
         raw = self._file_reader.read(Path(file_path))
         report = self._report_parser.parse(json.loads(raw))
-        pull_request = self._github_service.get_pull_request(pull_request)
+        # pull_request = self._github_service.get_pull_request(pull_request)
 
         main = self._github_service.get_main_branch()
         coverage_diff = main.coverage_report.compare(report)
