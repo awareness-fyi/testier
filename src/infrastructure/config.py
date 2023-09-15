@@ -1,0 +1,7 @@
+import os
+
+
+class Config:
+    GITHUB_TOKEN = os.getenv("TESTIER_GITHUB_TOKEN")
+    MAIN_BRANCH = os.getenv("TESTIER_MAIN_BRANCH")
+    DB_CONNECTION_STRING = os.getenv("TESTIER_DB_CONNECTION_STRING")
