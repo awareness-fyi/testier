@@ -1,2 +1,6 @@
+
+REPOSITORY=$1
+PR_NUMBER=$2
+
 pytest --cov-report json:cov.json --cov=testier-playground/production_code testier-playground/tests
-python src/ci.py --pull-request 1 --repository awareness-fyi/testier -f cov.json
+python src/ci.py --pull-request $PR_NUMBER --repository $REPOSITORY -f cov.json
