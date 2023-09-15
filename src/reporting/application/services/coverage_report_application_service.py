@@ -25,31 +25,32 @@ class CoverageReportApplicationService:
         coverage_diff = main.coverage_report.compare(report)
         # self._github_service.upsert(pull_request.id, report, coverage_diff)
         message = f"""
-        Hola! 👋🏼
-        I'm here to report about the code coverage change of your PR 🤩
+### Code coverage change report
+Hola! 👋🏼
+I'm here to report about the code coverage change of your PR 🤩
         """
         if coverage_diff.is_zero():
             message += f"""
-            It seems that nothing has changed, which is good!
-            The repository keeps a {coverage_diff}% code coverage.
-            All thanks to you! 🙏🏼
+It seems that nothing has changed, which is good!
+The repository keeps a decent {coverage_diff}% code coverage.
+All thanks to you! 🙏🏼
             """
         elif coverage_diff < 0:
             message += f"""
-            So, the situation is not looking very good.
-            The code coverage in the repo just dropped {coverage_diff}% 🔻
+So, the situation is not looking very good.
+The code coverage in the repo just dropped {coverage_diff}% 🔻
             """
         elif coverage_diff > 0:
             message += f"""
-            OMG! Look at you! You testing badass!
-            The code coverage in this repository just went up by {coverage_diff}% 💚
+OMG! Look at you! You testing badass!
+The code coverage in this repository just went up by {coverage_diff}% 💚
             """
 
         message += """
-            You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment 😎
-            Keep the hard work 💪🏼
-            
-            _Maccabi is only in Haifa_
+_You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment_ 😎
+_Keep the hard work_ 💪🏼
+
+At your service 🫡
             """
 
         # notification = self._notification_service.get(Channel.GITHUB)
