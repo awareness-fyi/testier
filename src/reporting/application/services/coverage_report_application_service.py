@@ -32,18 +32,20 @@ I'm here to report about the code coverage change of your PR 🤩
         if coverage_diff.is_zero():
             message += f"""
 It seems that nothing has changed, which is good!
-The repository keeps a decent {coverage_diff}% code coverage.
+The repository keeps a decent {coverage_diff:.2f}% code coverage.
 All thanks to you! 🙏🏼
             """
         elif coverage_diff < 0:
             message += f"""
 So, the situation is not looking very good.
-The code coverage in the repo just dropped {coverage_diff}% 🔻
+The code coverage in the repo just dropped {coverage_diff:.2f}% 🔻
+From {main.coverage_report.percent:.2f}% to {report.percent:.2f}%.
             """
         elif coverage_diff > 0:
             message += f"""
 OMG! Look at you! You testing badass!
-The code coverage in this repository just went up by {coverage_diff}% 💚
+The code coverage in this repository just went up by {coverage_diff:.2f}% 💚
+From {main.coverage_report.percent:.2f}% to {report.percent:.2f}%.
             """
 
         message += """
