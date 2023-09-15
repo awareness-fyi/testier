@@ -51,7 +51,8 @@ class GithubService:
             main = pr.branch.model_copy(deep=True)
             main.name = Config.MAIN_BRANCH
             self._branch_repo.upsert(main)
-            self._github_api_client.post_comment(pr_number, "Congrats! This is the first time you are using our tool!")
+            comment_id = self._github_api_client.post_comment(pr_number, "Congrats! This is the first time you are using our tool!")
+            pr.comment_id = str(comment_id)
             return
 
         self._branch_repo.update_coverage(name=pr.branch.name,
