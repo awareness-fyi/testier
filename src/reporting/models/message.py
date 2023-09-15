@@ -21,7 +21,7 @@ _Keep the hard work_ 💪🏼"""
 class Message:
     @classmethod
     def build(cls, main: CoverageReport, head: CoverageReport) -> str:
-        coverage_diff = main.coverage_report.compare(head)
+        coverage_diff = main.compare(head)
         message = "### Code coverage change report"
         if coverage_diff.is_zero():
             message += COVERAGE_NO_CHANGE.format(main=main.percent)
