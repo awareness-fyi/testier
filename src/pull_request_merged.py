@@ -1,5 +1,7 @@
 from argparse import ArgumentParser
 
+from reporting.application.services.coverage_report_application_service import CoverageReportApplicationService
+
 
 def get_args():
     arg_parse = ArgumentParser()
@@ -9,9 +11,8 @@ def get_args():
 
 
 def main():
-    # pull the diff
-    # add the diff of the coverage to main branch
-    pass
+    args = get_args()
+    CoverageReportApplicationService(args.repository).pull_request_merged(args.pull_request)
 
 
 if __name__ == '__main__':

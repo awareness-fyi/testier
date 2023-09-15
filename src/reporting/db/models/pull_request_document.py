@@ -10,5 +10,5 @@ class PullRequestDocument(Document):
     branch = ReferenceField(BranchDocument, required=True)
     author_username = StringField(required=True)
     author_name = StringField(required=True)
-    comment_id = StringField(required=False)
+    comment_id = StringField(required=False, null=True)
     coverage_change = DecimalField(required=True)
