@@ -27,19 +27,16 @@ class GithubService:
             coverage_change = coverage_report.compare(main.coverage_report)
         else:
             coverage_change = Decimal("0")
-        try:
-            pull_request = self._pull_request_repo.get(github_pull_request_number)
-            pull_request.coverage_change = coverage_change
-        except DoesNotExist:
-            github_pull_request = self._github_api_client.get_pull_request(github_pull_request_number)
-            pull_request = PullRequest(github_pull_request_number=github_pull_request_number,
-                                       branch=Branch(name=github_pull_request.head.ref,
-                                                     coverage_report=coverage_report,
-                                                     repository=self._repository),
-                                       author=GithubUser(username=github_pull_request.user.login,
-                                                         name=github_pull_request.user.name),
-                                       repository=Repository(id=self._repository),
-                                       coverage_change=coverage_change)
+
+        github_pull_request = self._github_api_client.get_pull_request(github_pull_request_number)
+        pull_request = PullRequest(github_pull_request_number=github_pull_request_number,
+                                   branch=Branch(name=github_pull_request.head.ref,
+                                                 coverage_report=coverage_report,
+                                                 repository=self._repository),
+                                   author=GithubUser(username=github_pull_request.user.login,
+                                                     name=github_pull_request.user.name),
+                                   repository=Repository(id=self._repository),
+                                   coverage_change=coverage_change)
 
         self._pull_request_repo.upsert(pull_request)
         return pull_request
