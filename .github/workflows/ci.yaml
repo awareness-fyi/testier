@@ -29,4 +29,4 @@ jobs:
           TESTIER_GITHUB_APP_ID: ${{ secrets.TESTIER_GITHUB_APP_ID }}
           TESTIER_GITHUB_APP_PRIVATE_KEY: ${{ secrets.TESTIER_GITHUB_APP_PRIVATE_KEY }}
         run: |
-          sh test.sh ${{ github.repository }} ${{ github.repository }}
+          sh test.sh ${{ github.repository }} ${{ github.event.number }}
