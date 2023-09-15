@@ -43,13 +43,13 @@ class Message:
             return message
 
         main_report = main.coverage_report
-        coverage_diff = main_report.compare(head)
+        coverage_diff = head.compare(main_report)
 
         if coverage_diff.is_zero():
             message += COVERAGE_NO_CHANGE.format(main=main_report.percent)
-        elif coverage_diff > 0:
-            message += COVERAGE_DECREASE.format(main=main_report.percent, head=head.percent, coverage_diff=coverage_diff)
         elif coverage_diff < 0:
+            message += COVERAGE_DECREASE.format(main=main_report.percent, head=head.percent, coverage_diff=coverage_diff)
+        elif coverage_diff > 0:
             message += COVERAGE_INCREASE.format(main=main_report.percent, head=head.percent, coverage_diff=coverage_diff)
 
         message += FOOTER

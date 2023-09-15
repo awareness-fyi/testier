@@ -31,10 +31,11 @@ class GithubService:
 
     def get_main_branch(self) -> Branch | None:
         # TODO: get main branch from DB
-        return Branch(name=Config.MAIN_BRANCH,
-                      coverage_report=CoverageReport(percent=Decimal("85.70"),
-                                                     diff_from_main_branch=Decimal("0"))
-                      )
+        # return Branch(name=Config.MAIN_BRANCH,
+        #               coverage_report=CoverageReport(percent=Decimal("85.70"),
+        #                                              diff_from_main_branch=Decimal("0"))
+        #               )
+        return None
 
     def notify(self, pull_request: PullRequest, content: str) -> None:
         if pull_request.comment_id:
