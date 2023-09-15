@@ -2,19 +2,23 @@ from decimal import Decimal
 
 from reporting.models.coverage_report import CoverageReport
 
-COVERAGE_DECREASE = """So, the situation is not looking very good.
+COVERAGE_DECREASE = """
+So, the situation is not looking very good.
 The code coverage in the repo just dropped {coverage_diff:.2f}% 🔻
 From {main:.2f}% to {head:.2f}%."""
 
-COVERAGE_INCREASE = """OMG! Look at you! You testing badass!
+COVERAGE_INCREASE = """
+OMG! Look at you! You testing badass!
 The code coverage in this repository just went up by {coverage_diff:.2f}% 💚
 From {main:.2f}% to {head:.2f}%."""
 
-COVERAGE_NO_CHANGE = """It seems that nothing has changed, which is good!
+COVERAGE_NO_CHANGE = """
+It seems that nothing has changed, which is good!
 The repository keeps a decent {main:.2f}% code coverage.
 All thanks to you! 🙏🏼"""
 
-FOOTER = """_You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment_ 😎
+FOOTER = """
+_You can always add more tests before you merge your PR and I'll make sure to update you here, through this comment_ 😎
 _Keep the hard work_ 💪🏼"""
 
 
