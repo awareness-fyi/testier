@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+from infrastructure.gateway.github_api_client import GithubApiClient
 from infrastructure.readers.file_reader import FileReader
 from notifications.interfaces.channel import Channel
 from notifications.interfaces.notification_service import NotificationService
@@ -26,5 +27,7 @@ class CoverageReportApplicationService:
         # self._github_service.upsert(pull_request.id, report, coverage_diff)
 
         message = f"Coverage change is {coverage_diff:.2f}%.\nFrom {main.coverage_report.percent:.2f}% to {report.percent:.2f}%"
-        notification = self._notification_service.get(Channel.GITHUB)
-        notification.notify(message)
+        # notification = self._notification_service.get(Channel.GITHUB)
+        # notification.notify(message)
+
+        GithubApiClient().post_comment(pull_request_number, message)
