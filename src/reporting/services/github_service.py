@@ -20,7 +20,7 @@ class GithubService:
 
     def get_main_branch(self) -> Branch:
         return Branch(name=Config.MAIN_BRANCH,
-                      coverage_report=CoverageReport(percent=Decimal("85.71")),
+                      coverage_report=CoverageReport(percent=Decimal("85.70")),
                       diff_from_main_branch=Decimal("0"))
 
     def upsert(self, github_pull_request_number: str, report: CoverageReport, diff_from_main_branch: Decimal) -> PullRequest:
