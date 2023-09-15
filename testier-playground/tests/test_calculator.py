@@ -11,3 +11,8 @@ class TestCalculator:
         calculator = Calculator()
 
         assert calculator.subtract(2, 1) == 1
+
+    def test_mod(self):
+        calculator = Calculator()
+
+        assert calculator.mod(20, 4) == 0
