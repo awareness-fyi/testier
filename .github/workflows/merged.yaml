@@ -1,0 +1,28 @@
+on:
+  pull_request:
+    types:
+      - closed
+
+
+jobs:
+  update_main_coverage:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -r requirements.txt
+      - name: Test with pytest
+        env:
+          TESTIER_GITHUB_APP_ID: ${{ secrets.TESTIER_GITHUB_APP_ID }}
+          TESTIER_GITHUB_APP_PRIVATE_KEY: ${{ secrets.TESTIER_GITHUB_APP_PRIVATE_KEY }}
+          TESTIER_DB_CONNECTION_STRING: ${{ secrets.TESTIER_DB_CONNECTION_STRING }}
+        run: |
+          python src/pull_request_merged.py --pull-request ${{ github.event.number }} --repository ${{ github.repository }}
