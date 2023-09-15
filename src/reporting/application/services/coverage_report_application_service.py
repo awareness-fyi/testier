@@ -26,8 +26,6 @@ class CoverageReportApplicationService:
         # self._github_service.upsert(pull_request.id, report, coverage_diff)
         message = f"""
 ### Code coverage change report
-Hola! 👋🏼
-I'm here to report about the code coverage change of your PR 🤩
         """
         if coverage_diff.is_zero():
             message += f"""
