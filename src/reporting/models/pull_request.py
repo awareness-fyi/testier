@@ -10,7 +10,7 @@ class PullRequest(BaseModel):
     branch: Branch
     author: GithubUser
     repository: Repository
-
+    comment_id: str | None = None
 
     def __eq__(self, other: "PullRequest") -> bool:
         return other.id == self.id

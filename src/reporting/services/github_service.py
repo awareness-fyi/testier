@@ -15,20 +15,33 @@ class GithubService:
         self._github_api_client = GithubApiClient(repository)
         self._repository = repository
 
-    def get_pull_request(self, github_pull_request_number: str) -> PullRequest:
-        pass
-
-    def get_main_branch(self) -> Branch:
-        return Branch(name=Config.MAIN_BRANCH,
-                      coverage_report=CoverageReport(percent=Decimal("85.70")),
-                      diff_from_main_branch=Decimal("0"))
-
-    def upsert(self, github_pull_request_number: str, report: CoverageReport, diff_from_main_branch: Decimal) -> PullRequest:
+    def obtain_pull_request(self, github_pull_request_number: str, coverage_report: CoverageReport) -> PullRequest:
+        # TODO: if exists in DB: pull from there
+        # if not:
         github_pull_request = self._github_api_client.get_pull_request(github_pull_request_number)
         pull_request = PullRequest(github_pull_request_number=github_pull_request_number,
+                                   branch=Branch(name=github_pull_request.head.ref,
+                                                 coverage_report=coverage_report),
                                    author=GithubUser(username=github_pull_request.user.login,
                                                      name=github_pull_request.user.name),
-                                   branch=Branch(coverage_report=report, name=github_pull_request.head.ref, diff_from_main_branch=diff_from_main_branch, ),
                                    repository=Repository(id=self._repository))
 
+        # TODO: upsert PR
         return pull_request
+
+    def get_main_branch(self) -> Branch | None:
+        # TODO: get main branch from DB
+        return Branch(name=Config.MAIN_BRANCH,
+                      coverage_report=CoverageReport(percent=Decimal("85.70"),
+                                                     diff_from_main_branch=Decimal("0"))
+                      )
+
+    def notify(self, pull_request: PullRequest, content: str) -> None:
+        if pull_request.comment_id:
+            self._github_api_client.edit_comment(pull_request.github_pull_request_number, pull_request.comment_id, content)
+            return
+
+        comment = self._github_api_client.post_comment(pull_request.github_pull_request_number,
+                                                       content)
+        pull_request.comment_id = comment.id
+        # TODO: upsert PR
