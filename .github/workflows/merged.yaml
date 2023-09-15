@@ -19,7 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
           pip install -r requirements.txt
-      - name: Test with pytest
+      - name: Update main branch coverage rate
         env:
           TESTIER_GITHUB_APP_ID: ${{ secrets.TESTIER_GITHUB_APP_ID }}
           TESTIER_GITHUB_APP_PRIVATE_KEY: ${{ secrets.TESTIER_GITHUB_APP_PRIVATE_KEY }}
