@@ -10,7 +10,6 @@ class PullRequestRepo:
 
     def upsert(self, pull_request: PullRequest) -> PullRequest:
         doc = self._mapper.map_to_document(pull_request)
-        doc.branch.save()
         doc.save(cascade=True)
         return self._mapper.map_to_model(doc)
 
