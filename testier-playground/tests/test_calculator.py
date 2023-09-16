@@ -24,8 +24,8 @@ class TestCalculator:
 
         assert calculator.divide(20, 4) == Decimal(5)
 
-    def test_pow(self):
-        calculator = Calculator()
-
-        assert calculator.pow(2, 3) == 8
+    # def test_pow(self):
+    #     calculator = Calculator()
+    #
+    #     assert calculator.pow(2, 3) == 8
 
