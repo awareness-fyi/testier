@@ -63,7 +63,7 @@ class GithubService:
             return None
 
     def notify(self, pull_request: PullRequest, content: str) -> None:
-        logger.info(f"notifying PR '{pull_request.github_pull_request_number}'")
+        logger.info(f"notifying PR '{pull_request.github_pull_request_number}', current comment: {pull_request.comment_id}")
         if pull_request.comment_id:
             logger.info(f"deleting comment '{pull_request.comment_id}'")
             self._github_api_client.delete_comment(pull_request.github_pull_request_number, pull_request.comment_id)
