@@ -18,7 +18,7 @@ class PullRequestMapper:
                                    author_name=pr.author.name,
                                    comment_id=pr.comment_id,
                                    coverage_change=pr.coverage_change,
-                                   id=f"{pr.repository}_{pr.github_pull_request_number}")
+                                   id=f"{pr.repository.id}_{pr.github_pull_request_number}")
 
     def map_to_model(self, document: PullRequestDocument) -> PullRequest:
         return PullRequest(github_pull_request_number=document.gh_number,
