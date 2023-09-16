@@ -52,6 +52,7 @@ class GithubService:
         pr = self._pull_request_repo.get(pr_number)
         main = self.get_main_branch()
         if not main:
+            logger.info(f"no main was found, creating new one")
             main = pr.branch.model_copy(deep=True)
             main.name = Config.MAIN_BRANCH
             self._branch_repo.upsert(main)
