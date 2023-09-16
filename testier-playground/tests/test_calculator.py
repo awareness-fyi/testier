@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from production_code.calculator import Calculator
 
 
@@ -16,3 +18,8 @@ class TestCalculator:
         calculator = Calculator()
 
         assert calculator.mod(20, 4) == 0
+
+    def test_divide(self):
+        calculator = Calculator()
+
+        calculator.divide(20, 4) == Decimal(5)
