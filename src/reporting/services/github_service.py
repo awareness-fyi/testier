@@ -23,6 +23,7 @@ class GithubService:
         self._pull_request_repo = PullRequestRepo(repository)
 
     def upsert_pull_request(self, github_pull_request_number: str, coverage_report: CoverageReport) -> PullRequest:
+        logger.info(f"upsering PR")
         main = self.get_main_branch()
         if main:
             coverage_change = coverage_report.compare(main.coverage_report)
