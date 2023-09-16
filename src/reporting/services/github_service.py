@@ -4,6 +4,7 @@ from mongoengine import DoesNotExist
 
 from infrastructure.config import Config
 from infrastructure.gateway.github_api_client import GithubApiClient
+from infrastructure.logger import logger
 from reporting.application.repositories.branch_repo import BranchRepo
 from reporting.application.repositories.pull_request_repo import PullRequestRepo
 from reporting.models.branch import Branch
@@ -62,11 +63,15 @@ class GithubService:
             return None
 
     def notify(self, pull_request: PullRequest, content: str) -> None:
+        logger.info(f"notifying PR '{pull_request.github_pull_request_number}'")
         if pull_request.comment_id:
+            logger.info(f"deleting comment '{pull_request.comment_id}'")
             self._github_api_client.delete_comment(pull_request.github_pull_request_number, pull_request.comment_id)
             pull_request.comment_id = None
 
+        logger.info(f"posting comment")
         comment = self._github_api_client.post_comment(pull_request.github_pull_request_number,
                                                        content)
+        logger.info(f"comment posted, id: {comment.id}")
         pull_request.comment_id = str(comment.id)
         self._pull_request_repo.upsert(pull_request)
