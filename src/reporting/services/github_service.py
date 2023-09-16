@@ -60,7 +60,7 @@ class GithubService:
             pr.comment_id = str(comment_id)
             return
 
-        self._branch_repo.update_coverage(name=pr.branch.name,
+        self._branch_repo.update_coverage(name=main.name,
                                           coverage_diff=pr.coverage_change)
 
     def get_main_branch(self) -> Branch | None:
