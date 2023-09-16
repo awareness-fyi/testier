@@ -14,3 +14,6 @@ class Calculator:
 
     def divide(self, a: int, b: int) -> Decimal:
         return Decimal(str(a / b))
+
+    def pow(self, a: int, b: int) -> int:
+        return a ** b
