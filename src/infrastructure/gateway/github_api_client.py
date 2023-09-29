@@ -15,6 +15,7 @@ class GithubApiClient:
         self._gh = installation.get_github_for_installation().get_repo(repository)
 
     def get_pull_request(self, github_pull_request_number: str) -> PullRequest:
+
         pr = self._gh.get_pull(int(github_pull_request_number))
         return pr
 
