@@ -17,6 +17,7 @@ class GithubApiClient:
         pr = self._gh.get_pull(int(github_pull_request_number))
         return pr
 
+
     def post_comment(self, github_pull_request_number: str, content: str) -> IssueComment:
         pr = self.get_pull_request(github_pull_request_number)
         return pr.create_issue_comment(content)
