@@ -17,6 +17,8 @@ It seems that nothing has changed, which is good!
 The repository keeps a decent {main:.2f}% code coverage.
 All thanks to you! 🙏🏼"""
 
+
+
 NO_MAIN = """
 We are missing information about the main branch and therefore can not compare the current branch to the main branch.
 This might happen due to either:
