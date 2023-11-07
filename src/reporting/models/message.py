@@ -6,6 +6,7 @@ The code coverage in the repo just dropped {coverage_diff:.2f}% 🔻
 From {main:.2f}% to {head:.2f}%."""
 
 
+
 COVERAGE_INCREASE = """
 OMG! Look at you! You testing badass!
 The code coverage in this repository just went up by {coverage_diff:.2f}% 💚
