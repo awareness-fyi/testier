@@ -10,6 +10,8 @@ from infrastructure.config import Config
 
 class GithubApiClient:
 
+
+
     def __init__(self, repository: str) -> None:
         auth = Auth.AppAuth(Config.TESTIER_GITHUB_APP_ID, Config.TESTIER_GITHUB_APP_PRIVATE_KEY)
         integration = GithubIntegration(auth=auth)
