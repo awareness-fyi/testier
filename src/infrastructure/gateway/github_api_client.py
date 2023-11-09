@@ -7,6 +7,7 @@ from infrastructure.config import Config
 
 
 
+
 class GithubApiClient:
 
     def __init__(self, repository: str) -> None:
