@@ -8,6 +8,7 @@ from reporting.models.repository import Repository
 
 
 
+
 class PullRequest(BaseModel):
     github_pull_request_number: str
     branch: Branch
