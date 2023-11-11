@@ -5,6 +5,7 @@ from infrastructure.types import RoundDecimal
 
 
 
+
 from reporting.models.branch import Branch
 
 from reporting.models.gituhub_user import GithubUser
