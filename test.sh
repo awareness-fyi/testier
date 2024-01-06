@@ -1,4 +1,3 @@
-
 COMMIT_SHA=$1
 
 pytest --cov-report json:cov.json --cov=testier-playground/production_code testier-playground/tests
