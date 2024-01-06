@@ -21,6 +21,7 @@ class CoverageReportApplicationService:
         logger.info(f"updating PR '{pull_request_number}' from file '{file_path}'")
 
         # raw = self._file_reader.read(Path(file_path))
+
         # report = self._report_parser.parse(json.loads(raw))
         # coverage_report = CoverageReport(percent=report.totals.percent_covered)
         # logger.info(f"got coverage of {coverage_report.percent:.2f}")
