@@ -20,6 +20,6 @@ jobs:
           pip install -r requirements.txt
       - name: Test with pytest
         env:
-          COMMIT_SHA: ${{ github.sha }}
+          COVERPULSE_COMMIT_SHA: ${{ github.sha }}
         run: |
           sh test.sh
