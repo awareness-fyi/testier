@@ -16,6 +16,7 @@ class CoverageReportApplicationService:
         self._file_reader = FileReader()
         self._report_parser = PytestCoverageReportParser()
 
+
     def update_pull_request(self, file_path: str, pull_request_number: str) -> None:
         logger.info(f"updating PR '{pull_request_number}' from file '{file_path}'")
         # raw = self._file_reader.read(Path(file_path))
