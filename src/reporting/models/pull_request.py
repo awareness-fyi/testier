@@ -20,6 +20,7 @@ class PullRequest(BaseModel):
     github_pull_request_number: str
     branch: Branch
     author: GithubUser
+
     repository: Repository
     comment_id: str | None = None
     coverage_change: RoundDecimal
