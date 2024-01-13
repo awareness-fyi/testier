@@ -3,6 +3,9 @@ name: Automated tests
 
 on:
   push:
+    branches:
+      - '*'
+      - '!main'
 
 
 jobs:
