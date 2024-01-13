@@ -6,8 +6,6 @@ from github.PullRequest import PullRequest
 from infrastructure.config import Config
 
 
-
-
 class GithubApiClient:
 
     def __init__(self, repository: str) -> None:
