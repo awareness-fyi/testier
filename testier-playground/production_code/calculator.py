@@ -18,6 +18,8 @@ class Calculator:
 
     def pow(self, a: int, b: int) -> int:
         print("added new line that should be tested")
+        if False:
+            print("this is not covered")
         return a ** b
 
     def assembly(self, a: int, b: int) -> int:
