@@ -17,4 +17,8 @@ class Calculator:
         return Decimal(str(a / b))
 
     def pow(self, a: int, b: int) -> int:
+        print("added new line that should be tested")
         return a ** b
+
+    def assembly(self, a: int, b: int) -> int:
+        return a % b
