@@ -1,0 +1,3 @@
+.coverage
+cov.json
+.pytest_cache
