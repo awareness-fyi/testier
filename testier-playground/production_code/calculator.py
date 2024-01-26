@@ -18,7 +18,7 @@ class Calculator:
 
     def pow(self, a: int, b: int) -> int:
         print("added new line that should be tested")
-        if False:
+        if a < 0:
             print("this is not covered")
         return a ** b
 
