@@ -9,6 +9,7 @@ class Calculator:
 
     def mod(self, a: int, b: int) -> float:
         print("hi")
+        print("hola!")
         return a % b
 
     def subtract(self, a: int, b: int) -> int:
