@@ -3,7 +3,6 @@ from decimal import Decimal
 from src.calculator import Calculator
 
 
-
 class TestCalculator:
     def test_add(self):
         calculator = Calculator()
