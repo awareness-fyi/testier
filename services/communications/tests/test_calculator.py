@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from production_code.calculator import Calculator
+from src.calculator import Calculator
 
 
 class TestCalculator:
