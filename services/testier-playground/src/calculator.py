@@ -22,13 +22,25 @@ class Calculator:
         return a - b
 
     def divide(self, a: int, b: int) -> Decimal:
+        print("hola!")
+        print("hola!")
+        print("hola!")
+        print("hola!")
         return Decimal(str(a / b))
 
     def pow(self, a: int, b: int) -> int:
         print("added new line that should be tested")
         if a < 0:
+            print("hola!")
+            print("hola!")
+            print("hola!")
+            print("hola!")
             print("this is not covered")
         return a ** b
 
     def assembly(self, a: int, b: int) -> int:
+        print("hola!")
+        print("hola!")
+        print("hola!")
+        print("hola!")
         return a % b
