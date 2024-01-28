@@ -3,8 +3,11 @@ from decimal import Decimal
 
 class Calculator:
 
-
     def add(self, a: int, b: int) -> int:
+        print("hola!")
+        print("hola!")
+        print("hola!")
+        print("hola!")
         return a + b
 
     def mod(self, a: int, b: int) -> float:

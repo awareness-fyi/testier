@@ -13,6 +13,12 @@ class Calculator:
         return a % b
 
     def subtract(self, a: int, b: int) -> int:
+        print("hola!")
+        print("hola!")
+        print("hola!")
+        print("hola!")
+        print("hola!")
+
         return a - b
 
     def divide(self, a: int, b: int) -> Decimal:
